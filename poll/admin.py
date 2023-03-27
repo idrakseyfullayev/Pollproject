@@ -1,13 +1,15 @@
 from django.contrib import admin
-from poll.models import QuestionModel, AnswerModel, PollModel
+from poll.models import QuestionModel, ChoiceModel, PollModel
 
 # Register your models here.
 
 admin.site.register(QuestionModel)
 admin.site.register(PollModel)
 
+
 # admin.site.register(AnswerModel)
 
-@admin.register(AnswerModel)
-class AnswerAdmin(admin.ModelAdmin):
+@admin.register(ChoiceModel)
+class ChoiceAdmin(admin.ModelAdmin):
     list_display = ('question', 'name', "is_true")
+

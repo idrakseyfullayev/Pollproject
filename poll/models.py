@@ -19,14 +19,14 @@ class QuestionModel(models.Model):
         return self.name    
 
 
-class AnswerModel(models.Model):
+class ChoiceModel(models.Model):
     name = models.CharField(max_length=1000)
     is_true = models.BooleanField()
     question = models.ForeignKey(QuestionModel, on_delete=models.CASCADE, related_name="question_answers")
     
     class Meta:
-        verbose_name = "Answer"
-        verbose_name_plural = "Answers"
+        verbose_name = "Choice"
+        verbose_name_plural = "Choices"
 
     def __str__(self):
         return self.question.name + "|" + self.name   
@@ -35,10 +35,15 @@ class AnswerModel(models.Model):
 class PollModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_polls")
     question = models.ForeignKey(QuestionModel, on_delete=models.CASCADE, related_name="question_polls")
+    answer = models.ForeignKey(ChoiceModel, on_delete=models.CASCADE, related_name="choice_polls")
 
     class Meta:
         verbose_name = "Poll"
         verbose_name_plural = "Polls"
 
     def __str__(self):
-        return self.user.username + "|" + self.question.name
+        return self.user.username + "|" + self.question.name + "|" + self.answer.name
+    
+
+
+

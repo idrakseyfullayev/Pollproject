@@ -1,10 +1,10 @@
-<nav class="navbar bg-primary">
+<nav class="navbar" style="background-color: #cf0d8eaf;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">POLL Page</a>
+    <a class="navbar-brand" href="{% url 'poll:index' %}">POLL Home Page</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end bg-primary" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas offcanvas-end" style="background-color: #bb20c9;" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">SEARCH</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -22,12 +22,17 @@
               Profil
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Login</a></li>
-              <li><a class="dropdown-item" href="#">Register</a></li>
+              <li><a class="dropdown-item" href="">{{request.user.username}}</a></li>
+              {% if request.user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'account:logout' %}">Logout</a></li>
+              {% else %}
+              <li><a class="dropdown-item" href="{% url 'account:login' %}">Login</a></li>
+              <li><a class="dropdown-item" href="{% url 'account:register' %}">Register</a></li>
+              {% endif %} 
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Logout</a></li>
+              
             </ul>
           </li>
         </ul>

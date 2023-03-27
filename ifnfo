@@ -21,6 +21,8 @@ python manage.py changepassword <username> - super istifadecinin parolunu yenile
 python manage.py runserver - serveri aktivlesdirir
 
 
+pip install -r requirements.txt - requirements.txt-den kitabxanalari koputere yukleyir
+
 git init - proyekt ucun bir defe yazilir
 git clone <url>- proyekt ucucn bir defe yazilir
 ------------------------------------------
@@ -33,6 +35,25 @@ ve ya
 git push origin master - oldugum yerden meleumatlari github master-ine  gonderirir
 ------------------------------------------------------------------------
 error verirse - git remote add origin < <repository> url>
+
+
+pythonanywhere
+virtual env yaratmaq:
+ls
+mkvirtualenv myvirtualenv --python=/usr/bin/python3.10
+git init
+git clone - https://github.com/idrakseyfullayev/todoproject.git
+git pull origin todoprupdate-8 - error verirse
+git remote add origin https://github.com/idrakseyfullayev/todoproject.git
+git pull origin todoprupdate-8
+pip install -r requirements.txt
+
+
+cd <qovluq> - qovluga kecid
+ls ve ls - qovlugun icindeki hem qovluq ve fayllari
+pwd - yolu gosterir- hal hazirdaki hardayiq
+
+
 
 
 

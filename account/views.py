@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 import re
 from django.contrib import messages
 from account.models import Account
+from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 import re
@@ -33,6 +34,9 @@ class RegisterView(generic.View):
                 Account.objects.create(user=user)
                 messages.success(request, "user created")
 
+                login(request, user)
+                return redirect("poll:index")
+
         if not username:
             messages.info(request, 'Please, enter username')
         if not password:
@@ -42,6 +46,25 @@ class RegisterView(generic.View):
 
 
 class LoginUserView(generic.View):
-    pass
+    def get(self, request, *args, **kwargs):
+        return render(request, 'login.html')
+    
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("poll:index")
+        else:
+            messages.info(request, "user was not found")
+            return redirect('account:login')
+
+
+class LogoutUserView(generic.View):
+    def get(self, request, *args, **kwargs):
+        logout(request)        
+        return redirect("poll:index")
 
 

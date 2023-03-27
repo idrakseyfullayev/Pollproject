@@ -2,6 +2,51 @@
 
 {% block head %}<title>Index Page</title> {% endblock %}
 
+
 {% block content %}
+{% if not request.user.username %}
+<div class="container mt-5"> 
+    <nav class="navbar  rounded-3"  style="background-color: #8ad1d1af; width:760px;">
+        <div class="container mt-5">        
+    <h5><p>Sualların təqdim olunması üçün <a href="{% url 'account:login' %}"><b>profil</b></a>  hesabıniza daxil və ya <a href="{% url 'account:register' %}"><b>qeydiyyatdan</b></a> keçin</p></h5>
+    </nav>    
+        </div>
+    </div>
+{% endif %}     
+{% if request.user.is_authenticated %}
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-body">
+            
+            <form method="POST">
+            {% csrf_token %}
+            {% for question in questions %} 
+            {{question}}
+            <input class="form-check-input" type="hidden" name="question_id{{question.id}}"  value="{{question.id}}">  
+            {% for question_answer in question.question_answers.all %}   
+            <div >
+                
+                <input class="form-check-input" type="radio" name="answer_id{{question.id}}"  value="{{question_answer.id}}">
+                <label class="form-check-label" for="answer_id{{question.id}}">{{question_answer.name}}</label>
+            </div>
+            {% endfor %}
+            <p>{{ Message }}</p>
+            {% endfor %}
+            
+            <button class=" btn btn-primary" type="submit">Confirm</button>
+            
+            </form>
+            
+            <!-- <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">Default checked radio</label>
+            </div>     -->
+        </div>        
+    </div>
+</div>
+{% endif %}
 
 {% endblock %}
+
+
+
