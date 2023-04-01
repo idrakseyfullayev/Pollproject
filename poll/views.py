@@ -11,7 +11,7 @@ class IndexView(generic.View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             questions = QuestionModel.objects.all()
-        
+            
             context = {
                 "questions": questions,
             }
